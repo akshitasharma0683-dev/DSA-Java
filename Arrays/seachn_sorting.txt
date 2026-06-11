@@ -1,0 +1,605 @@
+# Searching & Sorting in Java (DSA Notes)
+
+## Introduction
+
+Searching and Sorting are two fundamental concepts in Data Structures and Algorithms (DSA).
+
+- **Searching** is the process of finding a specific element in a collection of data.
+- **Sorting** is the process of arranging data in a specific order (ascending or descending).
+
+These concepts improve data organization and make operations such as searching, insertion, and deletion more efficient.
+
+---
+
+# Searching
+
+## What is Searching?
+
+Searching refers to finding the presence or position of a particular element in a dataset.
+
+### Example
+
+```java
+int[] arr = {10, 20, 30, 40, 50};
+```
+
+Searching for `30` returns index `2`.
+
+---
+
+## Types of Searching
+
+### 1. Linear Search
+
+Linear Search checks each element one by one until the target element is found or the array ends.
+
+### Algorithm
+
+1. Start from the first element.
+2. Compare each element with the target.
+3. If found, return its index.
+4. If the end of the array is reached, return -1.
+
+### Example
+
+```text
+Array = [10, 20, 30, 40, 50]
+
+Target = 40
+
+Check 10 ❌
+Check 20 ❌
+Check 30 ❌
+Check 40 ✅
+```
+
+### Java Code
+
+```java
+public static int linearSearch(int[] arr, int target) {
+    for(int i = 0; i < arr.length; i++) {
+        if(arr[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(1) |
+| Average Case | O(n) |
+| Worst Case | O(n) |
+
+### Space Complexity
+
+```text
+O(1)
+```
+
+### Advantages
+
+- Easy to implement.
+- Works with sorted and unsorted data.
+
+### Disadvantages
+
+- Inefficient for large datasets.
+
+---
+
+### 2. Binary Search
+
+Binary Search repeatedly divides the search space into two halves.
+
+### Important Condition
+
+The array must be sorted.
+
+### Algorithm
+
+1. Find the middle element.
+2. Compare it with the target.
+3. If equal, return index.
+4. If target is smaller, search left half.
+5. If target is greater, search right half.
+6. Repeat until element is found or search space becomes empty.
+
+### Example
+
+```text
+Array = [10, 20, 30, 40, 50, 60, 70]
+
+Target = 50
+
+Middle = 40
+
+50 > 40
+
+Search Right Half
+
+Middle = 60
+
+50 < 60
+
+Search Left Half
+
+Found 50
+```
+
+### Java Code
+
+```java
+public static int binarySearch(int[] arr, int target) {
+
+    int left = 0;
+    int right = arr.length - 1;
+
+    while(left <= right) {
+
+        int mid = left + (right - left) / 2;
+
+        if(arr[mid] == target)
+            return mid;
+
+        else if(arr[mid] < target)
+            left = mid + 1;
+
+        else
+            right = mid - 1;
+    }
+
+    return -1;
+}
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(1) |
+| Average Case | O(log n) |
+| Worst Case | O(log n) |
+
+### Space Complexity
+
+```text
+O(1)
+```
+
+### Advantages
+
+- Very efficient for large datasets.
+- Faster than Linear Search.
+
+### Disadvantages
+
+- Requires sorted data.
+
+---
+
+## Linear Search vs Binary Search
+
+| Feature | Linear Search | Binary Search |
+|----------|--------------|---------------|
+| Sorted Data Required | No | Yes |
+| Best Case | O(1) | O(1) |
+| Average Case | O(n) | O(log n) |
+| Worst Case | O(n) | O(log n) |
+| Easy to Implement | Yes | Yes |
+| Suitable for Large Data | No | Yes |
+
+---
+
+# Sorting
+
+## What is Sorting?
+
+Sorting is the process of arranging data in a specific order.
+
+### Types of Sorting Order
+
+#### Ascending Order
+
+```text
+10 20 30 40 50
+```
+
+#### Descending Order
+
+```text
+50 40 30 20 10
+```
+
+---
+
+## Why Sorting is Important?
+
+Sorting helps in:
+
+- Faster searching.
+- Better data organization.
+- Efficient data processing.
+- Improved algorithm performance.
+
+Example:
+
+```text
+Unsorted Array
+
+50 10 40 20 30
+
+Sorted Array
+
+10 20 30 40 50
+```
+
+---
+
+# Sorting Algorithms
+
+## 1. Bubble Sort
+
+Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+
+### Working
+
+```text
+50 20 40
+
+Compare 50 and 20
+Swap
+
+20 50 40
+
+Compare 50 and 40
+Swap
+
+20 40 50
+```
+
+### Java Code
+
+```java
+public static void bubbleSort(int[] arr) {
+
+    for(int i = 0; i < arr.length - 1; i++) {
+
+        for(int j = 0; j < arr.length - i - 1; j++) {
+
+            if(arr[j] > arr[j + 1]) {
+
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(n) |
+| Average Case | O(n²) |
+| Worst Case | O(n²) |
+
+### Space Complexity
+
+```text
+O(1)
+```
+
+### Stability
+
+Stable
+
+### Advantages
+
+- Easy to understand.
+- Easy to implement.
+
+### Disadvantages
+
+- Slow for large datasets.
+
+---
+
+## 2. Selection Sort
+
+Selection Sort repeatedly finds the smallest element and places it in its correct position.
+
+### Working
+
+```text
+64 25 12 22 11
+
+Find Minimum = 11
+
+Swap with First Element
+
+11 25 12 22 64
+```
+
+### Java Code
+
+```java
+public static void selectionSort(int[] arr) {
+
+    for(int i = 0; i < arr.length - 1; i++) {
+
+        int minIndex = i;
+
+        for(int j = i + 1; j < arr.length; j++) {
+
+            if(arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+}
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(n²) |
+| Average Case | O(n²) |
+| Worst Case | O(n²) |
+
+### Space Complexity
+
+```text
+O(1)
+```
+
+### Stability
+
+Not Stable
+
+---
+
+## 3. Insertion Sort
+
+Insertion Sort builds a sorted portion of the array one element at a time.
+
+### Working
+
+```text
+5 2 4 6
+
+Insert 2 before 5
+
+2 5 4 6
+
+Insert 4 between 2 and 5
+
+2 4 5 6
+```
+
+### Java Code
+
+```java
+public static void insertionSort(int[] arr) {
+
+    for(int i = 1; i < arr.length; i++) {
+
+        int key = arr[i];
+        int j = i - 1;
+
+        while(j >= 0 && arr[j] > key) {
+
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+}
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(n) |
+| Average Case | O(n²) |
+| Worst Case | O(n²) |
+
+### Space Complexity
+
+```text
+O(1)
+```
+
+### Stability
+
+Stable
+
+### Advantages
+
+- Good for small datasets.
+- Efficient for nearly sorted arrays.
+
+---
+
+## 4. Merge Sort
+
+Merge Sort uses the Divide and Conquer technique.
+
+### Steps
+
+1. Divide array into two halves.
+2. Recursively sort both halves.
+3. Merge sorted halves.
+
+### Working
+
+```text
+38 27 43 3
+
+Divide
+
+38 27 | 43 3
+
+Sort
+
+27 38 | 3 43
+
+Merge
+
+3 27 38 43
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(n log n) |
+| Average Case | O(n log n) |
+| Worst Case | O(n log n) |
+
+### Space Complexity
+
+```text
+O(n)
+```
+
+### Stability
+
+Stable
+
+### Advantages
+
+- Guaranteed performance.
+- Efficient for large datasets.
+
+### Disadvantages
+
+- Requires extra memory.
+
+---
+
+## 5. Quick Sort
+
+Quick Sort selects a pivot and partitions the array around it.
+
+### Steps
+
+1. Choose a pivot element.
+2. Place smaller elements on the left.
+3. Place larger elements on the right.
+4. Recursively repeat the process.
+
+### Working
+
+```text
+50 30 70 20 40
+
+Pivot = 50
+
+20 30 40 | 50 | 70
+```
+
+### Time Complexity
+
+| Case | Complexity |
+|--------|-----------|
+| Best Case | O(n log n) |
+| Average Case | O(n log n) |
+| Worst Case | O(n²) |
+
+### Space Complexity
+
+```text
+O(log n)
+```
+
+### Stability
+
+Not Stable
+
+### Advantages
+
+- Fast in real-world applications.
+- Frequently used in libraries and frameworks.
+
+---
+
+# Comparison of Sorting Algorithms
+
+| Algorithm | Best | Average | Worst | Stable |
+|------------|--------|----------|--------|---------|
+| Bubble Sort | O(n) | O(n²) | O(n²) | Yes |
+| Selection Sort | O(n²) | O(n²) | O(n²) | No |
+| Insertion Sort | O(n) | O(n²) | O(n²) | Yes |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | Yes |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) | No |
+
+---
+
+# When to Use Which Algorithm?
+
+| Scenario | Recommended Algorithm |
+|-----------|----------------------|
+| Small Dataset | Insertion Sort |
+| Nearly Sorted Data | Insertion Sort |
+| Large Dataset with Guaranteed Performance | Merge Sort |
+| Fast Practical Performance | Quick Sort |
+| Searching in Unsorted Data | Linear Search |
+| Searching in Sorted Data | Binary Search |
+
+---
+
+# Frequently Asked Interview Questions
+
+### Why is Binary Search faster than Linear Search?
+
+Binary Search reduces the search space by half in every iteration, resulting in O(log n) complexity, whereas Linear Search checks elements one by one and takes O(n) time.
+
+### Why must Binary Search use a sorted array?
+
+Because after comparing with the middle element, the algorithm must decide whether to move left or right. This is only possible if elements are sorted.
+
+### Difference Between Merge Sort and Quick Sort
+
+| Merge Sort | Quick Sort |
+|------------|------------|
+| Uses extra memory | Mostly in-place |
+| Stable | Not Stable |
+| Guaranteed O(n log n) | Worst Case O(n²) |
+| Better for linked lists | Better for arrays |
+
+### Which Sorting Algorithm Does Java Use?
+
+- Primitive arrays: Dual-Pivot Quick Sort
+- Object arrays: TimSort
+
+Example:
+
+```java
+Arrays.sort(arr);
+```
+
+---
+
+# Key Takeaways
+
+- Searching is used to find data.
+- Sorting is used to arrange data.
+- Linear Search works on any array but is slower.
+- Binary Search is faster but requires sorted data.
+- Bubble, Selection, and Insertion Sort are simple sorting algorithms.
+- Merge Sort guarantees O(n log n) performance.
+- Quick Sort is one of the fastest practical sorting algorithms.
+- Choosing the correct algorithm depends on data size and requirements.
