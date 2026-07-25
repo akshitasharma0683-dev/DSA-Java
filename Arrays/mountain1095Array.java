@@ -1,12 +1,12 @@
 public class mountain1095Array {
     public static void main(String[] args) {
-        MountainArray arr ={1,2,3,4,5,6,4,3,1};
+      int[] arr = {1,2,3,4,5,6,4,3,1};
        int  target =4;
        int ans=search(arr,target);
        System.out.println(ans);
 
     }
-    static int search(MountainArray arr, int target){
+    static int search(int[] arr, int target){
         int peak= peak(arr);
 
         int ans= orderignostic(arr, target, 0, peak);
@@ -17,16 +17,16 @@ public class mountain1095Array {
         return ans;
     }
 
-    static int peak(MountainArrayarr){
+    static int peak(int[] arr){
         int start=0;
         int end = arr.length-1;
          while(start<end){
             int mid = start+(end-start)/2;
-            if(arr[mid+1]<arr[mid]){
-                start=mid+1;
-            }else{
-                end=mid;
-            }
+        if(arr[mid]>arr[mid+1]){
+          end=mid;
+        }else{
+          start=mid+1;
+        }
          }
          return end;
 

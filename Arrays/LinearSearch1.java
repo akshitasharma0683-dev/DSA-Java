@@ -1,4 +1,4 @@
-public class linearSearch1{
+public class LinearSearch1{
     public static void main(String[] args) {
         int[] num={56,564,23,19,-6,6,-33};
         int target =19;
@@ -8,6 +8,8 @@ public class linearSearch1{
 
 
      static int Searchnum(int[] num, int target){
+
+        
         if (num.length==0) {
             return -1;
         }
